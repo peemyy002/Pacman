@@ -29,6 +29,7 @@ namespace Pacman {
 		Vector3 mMoveDirection;
 		float mTimer;
 		float mFrightenedTimer;
+		float mScatterTime;
 
 		void Start() {
 			mPath = new List<StageCell>();
@@ -84,12 +85,35 @@ namespace Pacman {
 						mTimer = CurrentStage.CellSize / (MoveSpeed * CurrentStage.CellSize);
 					}
 					else {
-					//	UpdatePathToGetAway();
+						UpdatePathToGetAway();
 					}
 				}
 			}
 			else if (GhostMode == GhostModeEnum.Scatter) {
-				// Assignment
+				mScatterTime += Time.deltaTime;
+				if (mScatterTime >= FrightenedTime) {
+					ChangeGhostMode(GhostModeEnum.Chase);
+					return;
+				}
+				
+				if (mTimer > 0) {
+					mTimer -= Time.deltaTime;
+					transform.position += mMoveDirection * MoveSpeed * CurrentStage.CellSize * Time.deltaTime;
+				}
+				else {
+					transform.position = mNextPosition;
+					if (mPathIndex < mPath.Count - 1) {
+						mPathIndex += 1;
+						StageCell nextCell = mPath[mPathIndex];
+						mNextPosition = nextCell.Position;
+						Vector3 diff = mNextPosition - transform.position;
+						mMoveDirection = diff.normalized;
+						mTimer = CurrentStage.CellSize / (MoveSpeed * CurrentStage.CellSize);
+					}
+					else {
+						UpdatePathToGetAway();
+					}
+				}
 			}
 	}
 

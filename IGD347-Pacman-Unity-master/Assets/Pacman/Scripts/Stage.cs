@@ -15,15 +15,18 @@ namespace Pacman {
 		int mNumberOfRows;
 
 		void Awake() {
+			//Get XZ of BTlC
 			int bottomLeftCell_x = Mathf.FloorToInt(BottomLeftCellPosition.x);
 			int bottomLeftCell_z = Mathf.FloorToInt(BottomLeftCellPosition.z);
-			
+			//Get XZ of TRC
 			int topRightCell_x = Mathf.FloorToInt(TopRightCellPosition.x);
 			int topRightCell_z = Mathf.FloorToInt(TopRightCellPosition.z);
-
+			//Get NUM of C
 			mNumberOfColumns = ((topRightCell_x - bottomLeftCell_x) / CellSize) + 1;
+			//Get NUM of R
 			mNumberOfRows = ((topRightCell_z - bottomLeftCell_z) / CellSize) + 1;
-
+			Debug.Log (mNumberOfColumns);
+			Debug.Log (mNumberOfRows);
 			// Create all cells
 			mCells = new StageCell[mNumberOfColumns, mNumberOfRows];
 			for (int c=0; c<mNumberOfColumns; c++) {
