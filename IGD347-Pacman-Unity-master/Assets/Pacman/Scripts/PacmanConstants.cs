@@ -9,6 +9,7 @@ namespace Pacman {
 
 		public const string TAG_PACDOT = "Pacdot";
 		public const string TAG_GHOST = "Ghost";
+		public const string TAG_POWERUP = "Powerup";
 	}
 
 }
