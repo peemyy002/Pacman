@@ -10,6 +10,9 @@ namespace Pacman {
 		public StageCell West;
 		public StageCell East;
 		public Vector3 Position;
+		public int R=0;
+		public int C=0;
+
 
 		public int TraversalPoint;
 

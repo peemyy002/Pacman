@@ -8,6 +8,7 @@ namespace Pacman {
 		public const int LAYER_WALL = 8;
 
 		public const string TAG_PACDOT = "Pacdot";
+		public const string TAG_GHOST = "Ghost";
 	}
 
 }

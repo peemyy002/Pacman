@@ -58,6 +58,21 @@ namespace Pacman {
 			if (other.gameObject.tag == PacmanConstants.TAG_PACDOT) {
 				Destroy(other.gameObject);
 			}
+			if (other.gameObject.tag == PacmanConstants.TAG_GHOST) {
+				GhostController ghost = other.gameObject.GetComponent<GhostController>();
+				if( ghost.GhostMode == GhostController.GhostModeEnum.Frightened)
+				{
+				Destroy (other.gameObject);
+				
+				}
+				else 
+				{
+					Destroy (this.gameObject);
+				}
+
+			}
+
+
 		}
 	}
 }

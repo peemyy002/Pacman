@@ -137,12 +137,86 @@ namespace Pacman {
 		
 		void UpdatePathToGetAway() {
 			Vector3 ghostPos = transform.position;
+			Vector3 pacmanPos = Game.Instance.Pacman.transform.position;
+			StageCell pacmanCell = Game.Instance.CurrentStage.GetStageCellAtPosition (pacmanPos);
+			int C = pacmanCell.C;
+			int R = pacmanCell.R;
+			int c1 = 0;
+			int c2 = 0;
+			int r1 = 0;
+			int r2 = 0;
 			StageCell ghostCell = Game.Instance.CurrentStage.GetStageCellAtPosition(ghostPos);
-			
+
+			int section = 0;
+			int GhostSection= 0;
 			int numberOfColumns = Game.Instance.CurrentStage.GetNumberOfColumns();
 			int numberOfRows = Game.Instance.CurrentStage.GetNumberOfRows();
-			int col = Random.Range(0, numberOfColumns - 1);
-			int row = Random.Range(0, numberOfRows - 1);
+		
+			//Find Sections
+			//S1
+			if ((C >= 0 && C <= numberOfColumns / 2) && (R >= 0 && R <= numberOfRows / 2)) 
+			{
+				section = 1;
+			} else if ((C >= 0 && C <= numberOfColumns / 2) && (R >= (numberOfRows / 2) + 1 && R <= numberOfRows)) 
+			{
+				section = 2;
+			} else if ((C >= (numberOfColumns / 2) + 1 && C <= numberOfColumns) && (R >= (numberOfRows / 2) + 1 && R <= numberOfRows)) 
+			{
+				section = 3;
+			} else if ((C >= (numberOfColumns / 2) + 1 && C <= numberOfColumns) && (R >= 0 && R <= numberOfRows / 2)) 
+			{
+				section = 4;
+			}
+
+			//
+			if (section == 1) 
+			{
+				GhostSection =3;
+			}
+			if (section == 3) 
+			{
+				GhostSection = 1;
+			}
+			if (section ==2)
+			{
+				GhostSection = 4;
+			}
+			if (section== 4)
+			{
+				GhostSection=2;
+			}
+			//
+			if (GhostSection==1)
+			{
+				c1= 0;
+				c2= numberOfColumns/2;
+				r1=0;
+				r2=numberOfRows/2;
+			}
+			if (GhostSection==2)
+			{
+				c1= 0;
+				c2= numberOfColumns/2;
+				r1=(numberOfRows/2)+1;
+				r2=numberOfRows;
+			}
+			if (GhostSection==3)
+			{
+				c1= (numberOfColumns/2)+1;
+				c2= numberOfColumns;
+				r1=(numberOfRows/2)+1;
+				r2=numberOfRows;
+			}
+			if (GhostSection==4)
+			{
+				c1= (numberOfColumns/2)+1;
+				c2= numberOfColumns;
+				r1=0;
+				r2=numberOfRows/2;
+			}
+
+			int col = Random.Range(c1,c2);
+			int row = Random.Range(r1, r2);
 			StageCell targetCell = Game.Instance.CurrentStage.GetStageCellAt(col, row);
 			
 			List<StageCell> newPath = Game.Instance.CurrentStage.FindShortestPath(ghostCell, targetCell);
@@ -150,6 +224,7 @@ namespace Pacman {
 			mPathIndex = 0;
 			for (int i=0; i<newPath.Count; i++) {
 				mPath.Add(newPath[i]);
+				
 			}
 		}
 

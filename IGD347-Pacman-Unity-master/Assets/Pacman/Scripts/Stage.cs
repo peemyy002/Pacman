@@ -37,7 +37,8 @@ namespace Pacman {
 					cell.South = null;
 					cell.West = null;
 					cell.East = null;
-
+					cell.C=c;
+					cell.R=r;
 					mCells[c, r] = cell;
 				}
 			}
