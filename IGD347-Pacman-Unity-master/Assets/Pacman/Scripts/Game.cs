@@ -13,6 +13,8 @@ namespace Pacman {
 
 		public int Score;
 		public int HighScore;
+		public int nPacdot;
+		public int CheckPoint;
 
 
 		void Awake() {
@@ -47,8 +49,15 @@ namespace Pacman {
 				HighScore = PlayerPrefs.GetInt("high_score");
 			}
 		}
+
+		void Update() {
+			if (Score == nPacdot) {
+				Application.LoadLevel (CheckPoint);
+				PlayerPrefs.SetInt("high_score", HighScore);
+			}
 	}
 
 
 	}
 
+}
