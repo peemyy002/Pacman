@@ -53,8 +53,7 @@ namespace Pacman {
 		void Update() {
 			if (Score == nPacdot) {
 				Application.LoadLevel (CheckPoint);
-				PlayerPrefs.SetInt("high_score", HighScore);
-			}
+						}
 	}
 
 
