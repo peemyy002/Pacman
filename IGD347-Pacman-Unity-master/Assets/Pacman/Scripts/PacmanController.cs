@@ -5,7 +5,9 @@ namespace Pacman
 {
 	public class PacmanController : MonoBehaviour
 	{
-
+		public GameObject[] GhostPf;
+		public Transform[] BuildProxy;
+		public int time;
 		public float MoveSpeed;
 		public Stage CurrentStage;
 		float mTimer;
@@ -72,8 +74,27 @@ namespace Pacman
 			}
 				if (other.gameObject.tag == PacmanConstants.TAG_GHOST) {
 					GhostController ghost = other.gameObject.GetComponent<GhostController> ();
+				for (int i=0; i<Game.Instance.Ghosts.Length; i++) {
+					if(Game.Instance.Ghosts [0]==null)
+					{
+					GameObject newghost = Instantiate (GhostPf[0],BuildProxy[0].position,Quaternion.identity) as GameObject;
+					}
+					else if (Game.Instance.Ghosts [1]==null)
+					{
+						GameObject newghost = Instantiate (GhostPf[1],BuildProxy[0].position,Quaternion.identity) as GameObject;
+					}
+					else if (Game.Instance.Ghosts [2]==null)
+					{
+						GameObject newghost = Instantiate (GhostPf[2],BuildProxy[0].position,Quaternion.identity) as GameObject;
+					}
+
+
+				}
 					if (ghost.GhostMode == GhostController.GhostModeEnum.Frightened) {
 						Destroy (other.gameObject);
+
+
+						
 				
 					} else {
 						Destroy (this.gameObject);

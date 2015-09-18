@@ -11,6 +11,7 @@ namespace Pacman {
 		public Stage CurrentStage;
 		public GhostController[] Ghosts;
 
+
 		public int Score;
 		public int HighScore;
 		public int nPacdot;
@@ -53,6 +54,8 @@ namespace Pacman {
 		void Update() {
 			if (Score == nPacdot) {
 				Application.LoadLevel (CheckPoint);
+				PlayerPrefs.SetInt("high_score", HighScore);
+
 						}
 	}
 

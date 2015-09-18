@@ -47,6 +47,7 @@ namespace Pacman {
 					mTimer -= Time.deltaTime;
 					transform.position += mMoveDirection * MoveSpeed * CurrentStage.CellSize * Time.deltaTime;
 				}
+
 				else {
 					transform.position = mNextPosition;
 
@@ -75,6 +76,7 @@ namespace Pacman {
 					transform.position += mMoveDirection * MoveSpeed * CurrentStage.CellSize * Time.deltaTime;
 				}
 				else {
+					UpdatePathToGetAway();
 					transform.position = mNextPosition;
 					if (mPathIndex < mPath.Count - 1) {
 						mPathIndex += 1;
@@ -85,7 +87,7 @@ namespace Pacman {
 						mTimer = CurrentStage.CellSize / (MoveSpeed * CurrentStage.CellSize);
 					}
 					else {
-						UpdatePathToGetAway();
+
 					}
 				}
 			}
